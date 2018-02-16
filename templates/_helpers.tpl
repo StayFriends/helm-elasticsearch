@@ -25,3 +25,11 @@ Return the appropriate apiVersion for Curactor cron job.
 "batch/v2alpha1"
 {{- end -}}
 {{- end -}}
+
+{{/*
+Create a default fully qualified app name.
+We truncate at 53 chars (63 - len("-discovery")) because some Kubernetes name fields are limited to 63 (by the DNS naming spec).
+*/}}
+{{- define "servicename" -}}
+{{- default (include "fullname" .) .Values.common.serviceName -}}
+{{- end -}}

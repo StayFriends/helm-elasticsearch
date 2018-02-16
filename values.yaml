@@ -17,6 +17,9 @@ common:
   # For minikube use NodePort otherwise use LoadBalancer
   serviceType: LoadBalancer
 
+  # Override service name (for ES client)
+  # serviceName: elasticsearch
+
   env:
     CLUSTER_NAME: "myesdb"
 
@@ -56,6 +59,20 @@ client:
     NODE_MASTER: "false"
     NODE_INGEST: "true"
     HTTP_ENABLE: "true"
+
+  ingress:
+    enabled: false
+    # Used to create an Ingress record.
+    hosts:
+      # - elasticsearch.local
+    annotations:
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    tls:
+      # Secrets must be manually created in the namespace.
+      # - secretName: elasticsearch-tls
+      #   hosts:
+      #     - elasticsearch.local
 
 # Data nodes hold the shards that contain the documents you have indexed. Data
 # nodes handle data related operations like CRUD, search, and aggregations. 
